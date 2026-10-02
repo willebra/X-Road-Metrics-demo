@@ -1,0 +1,14 @@
+excludes:
+  paths:
+    - pattern: "**/test_requirements.txt"
+      reason: "TEST_OF"
+      comment: "Per-module test dependency manifests (pytest, coverage, ruff,
+        mongomock, type stubs). These are test-only tooling and are never
+        distributed with the X-Road-Metrics modules, whose runtime
+        dependencies are declared in each module's setup.py / requirements.txt.
+        ORT's PIP analyzer fails to resolve some of these files because the
+        unpinned 'coverage' requirement lets python-inspector backtrack into
+        coverage 3.5.3, whose distribute_setup.py bootstrap downloads the
+        legacy 'distribute' package over plain HTTP and PyPI now rejects it
+        with 'HTTP Error 403: SSL is required'. Test dependencies are out of
+        compliance scope, so the manifests are excluded rather than resolved."
