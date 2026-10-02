@@ -1,0 +1,13 @@
+excludes:
+  paths:
+    - pattern: "**/test_requirements.txt"
+      reason: "TEST_OF"
+      comment: "Per-module test dependency manifests (coverage, pytest, pytest-mock,
+        ruff, type stubs, etc.). These are test-only dependencies, not part of the
+        distributed X-Road Metrics product, so they are excluded from compliance
+        analysis. With analyzer skipExcluded enabled, excluding these paths also
+        stops ORT's PIP analyzer from attempting to resolve them. Resolution
+        currently fails because python-inspector selects the legacy coverage 3.5.3
+        sdist, whose bundled distribute_setup.py tries to download distribute over
+        insecure HTTP (http://pypi.python.org), which PyPI rejects with
+        'HTTP Error 403: SSL is required'."
